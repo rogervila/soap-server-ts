@@ -1,6 +1,6 @@
 {
     "name": "soap-server-ts",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Fetch API-first TypeScript SOAP server inspired by PHP SoapServer.",
     "type": "module",
     "main": "./dist/index.cjs",

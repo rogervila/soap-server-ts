@@ -31,7 +31,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
@@ -66,7 +66,7 @@ jobs:
           echo "dist_tag=${dist_tag}" >> "$GITHUB_OUTPUT"
 
       - name: Set package version from tag
-        run: pnpm version "${{ steps.release.outputs.version }}" --no-git-tag-version
+        run: pnpm version "${{ steps.release.outputs.version }}" --no-git-tag-version --allow-same-version
 
       - name: Typecheck
         run: pnpm run typecheck
