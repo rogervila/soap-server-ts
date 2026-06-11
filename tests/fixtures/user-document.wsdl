@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:user-service" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:user-service">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:user-service" elementFormDefault="qualified">
+      <xsd:element name="createUser">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" />
+            <xsd:element name="age" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createUserResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="return" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateUserRequest">
+    <wsdl:part name="parameters" element="tns:createUser" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserResponse">
+    <wsdl:part name="parameters" element="tns:createUserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="UserPortType">
+    <wsdl:operation name="createUser">
+      <wsdl:input message="tns:CreateUserRequest" />
+      <wsdl:output message="tns:CreateUserResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserBinding" type="tns:UserPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="createUser">
+      <soap:operation soapAction="urn:user-service#createUser" />
+      <wsdl:input><soap:body use="literal" /></wsdl:input>
+      <wsdl:output><soap:body use="literal" /></wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:port name="UserPort" binding="tns:UserBinding">
+      <soap:address location="https://example.com/user" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

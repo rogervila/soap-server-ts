@@ -1,0 +1,19 @@
+.php-version
+node_modules/
+dist/
+coverage/
+.vitest/
+node_modules/
+package-lock.json
+dist/
+build/
+coverage/
+logs/
+
+# Agents
+.agents/
+.github/agents/
+.github/copilot*
+.claude/
+.windsurf/
+skills-lock.json

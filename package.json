@@ -1,0 +1,51 @@
+{
+    "name": "soap-server-ts",
+    "version": "0.0.1",
+    "description": "Fetch API-first TypeScript SOAP server inspired by PHP SoapServer.",
+    "type": "module",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "scripts": {
+        "build": "tsup src/index.ts --format esm,cjs --dts --target es2022 --platform neutral --external libxml2-wasm --clean",
+        "test": "vitest run",
+        "test:php": "vitest run tests/php-compat.test.ts",
+        "typecheck": "tsc --noEmit",
+        "check:worker": "pnpm run build && node scripts/check-worker-bundle.mjs",
+        "verify": "pnpm run typecheck && pnpm run test && pnpm run check:worker",
+        "format": "pnpm exec biome check --write --unsafe",
+        "lint": "pnpm run typecheck && pnpm exec biome ci ."
+    },
+    "keywords": [
+        "soap",
+        "wsdl",
+        "cloudflare-workers",
+        "fetch",
+        "serverless",
+        "php-soapserver"
+    ],
+    "license": "MIT",
+    "packageManager": "pnpm@9.15.0",
+    "devDependencies": {
+        "@biomejs/biome": "2.4.16",
+        "@types/node": "^20.19.43",
+        "tsup": "^8.5.1",
+        "typescript": "^5.9.3",
+        "vitest": "^2.1.9"
+    },
+    "dependencies": {
+        "fast-xml-parser": "^5.8.0",
+        "libxml2-wasm": "^0.7.1"
+    }
+}
